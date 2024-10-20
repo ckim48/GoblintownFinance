@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>Dashboard</h1>
+
+        <h2>Gender Distribution</h2>
+        <canvas id="chart1"></canvas>
+
+        <h2>User's Activities</h2>
+        <canvas id="chart2"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.5/dist/chart.umd.min.js"></script>
+    <script>
+        var ctx = document.getElementById("chart1").getContext('2d');
+        new Chart(ctx,{
+            type: "bar",
+            data: {
+                labels: ["Male", "Female", "Other"],
+                datasets: [{
+                    data: [20, 25, 2]
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById("chart2").getContext('2d');
+        new Chart(ctx2,{
+            type: "line",
+            data: {
+                labels: ["Sunday", "Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday"],
+                datasets: [{
+                    data: [20, 25, 18, 10, 30, 35, 15]
+                }]
+            }
+        });
+    </script>
+    </body>
+</html>
