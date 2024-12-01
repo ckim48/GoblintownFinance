@@ -65,37 +65,75 @@
             color: #fff;
             font-size: 1.8rem;
         }
+        .number-card h2{
+            font-weight: 700;
+            font-size: 30px;
+            color:#4b4b4b;
+        }
+        .number-card p{
+            color: #666666;
+            font-weight: 600;
+        }
+        #card1{
+            background: linear-gradient(120deg, #f5c67b, #fbf3e5);
+        }
+        #card2{
+            background: linear-gradient(120deg, #9dd970, #ebfae0);
+        }
+        #card3{
+            background: linear-gradient(120deg, #75aad3, #d2e8f9);
+        }
     </style>
 </head>
 <body>
-        <h1 class="text-center">Dashboard</h1>
-
-
+    <h1 class="text-center" data-aos="zoom-in" data-aos-duration="700">Dashboard</h1>
     <div class="container">
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div id="card1" class="card number-card text-center p-4 shadow border-0"  data-aos="flip-up" data-aos-duration="1000">
+                    <h2 data-count="120">0</h2>
+                    <p>Total Users</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="card2" class="card  number-card text-center p-4 shadow border-0"  data-aos="flip-up" data-aos-duration="1000">
+                    <h2 data-count="80">0</h2>
+                    <p>Active Users</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="card3" class="card  number-card text-center p-4 shadow border-0"  data-aos="flip-up" data-aos-duration="1000">
+                    <h2 data-count="70">0</h2>
+                    <p>Feedback Count</p>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row g-4">
             <div class="col-md-6">
-                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000">
+                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                     <canvas id="chart1"></canvas>
                     <h2>Gender Distribution</h2>
                     <p>Visualizing the gender distribution of GoblinTown's users.</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <canvas id="chart2"></canvas>
                     <h2>User Activities</h2>
                     <p>Tracking user activity trends throughout the week.</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
                     <canvas id="chart3"></canvas>
                     <h2>Sentiment Analysis</h2>
                     <p>Insights into sentiment from feedback on in-game purchases.</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <div class="card p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
                     <canvas id="chart4"></canvas>
                     <h2>Keyword Analysis</h2>
                     <p>Highlighting frequent keywords from user feedback.</p>
@@ -230,6 +268,22 @@
             options: {
                 indexAxis: 'y',
             }
+        });
+
+        document.querySelectorAll('[data-count]').forEach((element)=>{
+
+            const updateCounter = () =>{
+                const target = +element.getAttribute('data-count'); //  120
+                const count = +element.innerText; // 0
+                const increment = target/100; // 1.2
+                if (count < target){
+                    element.innerText = Math.ceil(count+increment);
+                    setTimeout(updateCounter, 20); // adding duration of animation
+                }else{
+                    element.innerText = target
+                }
+            };
+            updateCounter();
         });
     </script>
     </body>
